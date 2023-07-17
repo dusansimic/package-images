@@ -33,6 +33,7 @@ jobs:
           echo "gh_version=${next_version}" >> $GITHUB_OUTPUT
 
   build:
+    name: Build
     runs-on: ubuntu-latest
     needs: get-version
     if: ${{ needs.get-version.outputs.gh_version != '' }}
@@ -67,8 +68,8 @@ jobs:
           file: ./images/${{ env.IMAGE_NAME }}/Containerfile
           push: true
           no-cache: true
-          build-args:
-            - ARCH=${{ matrix.arch }}
-            - LIBC_DIST=${{ matrix.libc }}
+          build-args: |
+            ARCH=${{ matrix.arch }}
+            LIBC_DIST=${{ matrix.libc }}
           tags: |
             ${{ steps.meta.outputs.tags }}
