@@ -18,6 +18,8 @@ jobs:
   get-version:
     name: Get next oha version
     runs-on: ubuntu-latest
+    outputs:
+      gh_version: ${{ steps.oha-version.outputs.gh_version }}
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v3

@@ -18,6 +18,8 @@ jobs:
   get-version:
     name: Get next dust version
     runs-on: ubuntu-latest
+    outputs:
+      gh_version: ${{ steps.dust-version.outputs.gh_version }}
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v3
