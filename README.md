@@ -10,13 +10,18 @@ the mechanism is not perfect so it might break at some point in the future. If
 that happens you can open a ticket on the
 [bug tracker](https://github.com/dusansimic/package-images/issues).
 
-### [Dust](https://github.com/bootandy/dust)
-
-#### Pull and use the image
+### [dust](https://github.com/bootandy/dust)
 
 ```sh
 $ docker pull ghcr.io/dusansimic/package-images/dust:latest
 $ docker run --rm ghcr.io/dusansimic/package-images/dust:latest
+```
+
+### [host-spawn](https://github.com/1player/host-spawn)
+
+```sh
+$ docker pull ghcr.io/dusansimic/package-images/host-spawn:latest
+$ docker run --rm ghcr.io/dusansimic/package-images/host-spawn:latest
 ```
 
 ### [oha](https://github.com/hatoo/oha)

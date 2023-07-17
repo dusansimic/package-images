@@ -1,0 +1,25 @@
+ARG BASE_IMAGE=docker.io/library/alpine:latest
+FROM $BASE_IMAGE
+
+ARG PACKAGE_VERSION=1.4.2
+
+LABEL org.opencontainers.image.authors="Dušan Simić <dusan.simic1810@gmail.com>" \
+  org.opencontainers.image.vendor="Dušan Simić" \
+  org.opencontainers.image.title="host-spawn" \
+  org.opencontainers.image.description="Run commands on your host from inside your toolbox or flatpak sandbox" \
+  org.opencontainers.image.licenses="MIT" \
+  org.opencontainers.image.source="https://github.com/dusansimic/package-images" \
+  org.opencontainers.image.url="https://github.com/dusanismic/package-images" \
+  org.opencontainers.image.documentation="https://github.com/dusanismic/package-images/blob/main/images/host-spawn/README.md" \
+  org.opencontainers.image.version="${PACKAGE_VERSION}" \
+  org.opencontainers.image.ref.name="ghcr.io/dusanismic/package-images/host-spawn:latest" \
+  org.opencontainers.image.base.name="docker.io/library/alpine:latest" \
+  com.github.dusansimic.package-images.name="host-spawn" \
+  com.github.dusansimic.package-images.version="${PACKAGE_VERSION}"
+
+ARG ARCH=x86_64
+
+ADD https://github.com/1player/host-spawn/releases/download/v${PACKAGE_VERSION}/host-spawn-${ARCH} /usr/local/bin/host-spawn
+RUN chmod +x /usr/local/bin/host-spawn
+
+ENTRYPOINT ["/usr/local/bin/host-spawn"]
