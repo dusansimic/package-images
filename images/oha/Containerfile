@@ -1,0 +1,26 @@
+ARG BASE_IMAGE=docker.io/library/alpine:latest
+
+FROM $BASE_IMAGE
+
+ARG PACKAGE_VERSION=0.6.0
+
+LABEL org.opencontainers.image.authors="Dušan Simić <dusan.simic1810@gmail.com>" \
+  org.opencontainers.image.vendor="Dušan Simić" \
+  org.opencontainers.image.title="oha" \
+  org.opencontainers.image.description="HTTP load generator." \
+  org.opencontainers.image.licenses="MIT" \
+  org.opencontainers.image.source="https://github.com/dusansimic/package-images" \
+  org.opencontainers.image.url="https://github.com/dusanismic/package-images" \
+  org.opencontainers.image.documentation="https://github.com/dusanismic/package-images/blob/main/images/oha/README.md" \
+  org.opencontainers.image.version="${PACKAGE_VERSION}" \
+  org.opencontainers.image.ref.name="dusanismic/oha:latest" \
+  org.opencontainers.image.base.name="docker.io/library/alpine:latest" \
+  com.github.dusansimic.package-images.name="oha" \
+  com.github.dusansimic.package-images.version="${PACKAGE_VERSION}"
+
+ARG ARCH=amd64
+
+RUN wget -O /usr/local/bin/oha https://github.com/hatoo/oha/releases/download/v${PACKAGE_VERSION}/oha-linux-${ARCH}
+RUN chmod +x /usr/local/bin/oha
+
+ENTRYPOINT ["/usr/local/bin/oha"]

@@ -1,0 +1,30 @@
+ARG BASE_IMAGE=docker.io/library/alpine:latest
+FROM $BASE_IMAGE
+
+ARG PACKAGE_VERSION=0.8.5
+
+LABEL org.opencontainers.image.authors="Dušan Simić <dusan.simic1810@gmail.com>" \
+  org.opencontainers.image.vendor="Dušan Simić" \
+  org.opencontainers.image.title="dust" \
+  org.opencontainers.image.description="A more intuitive version of du in rust." \
+  org.opencontainers.image.licenses="MIT" \
+  org.opencontainers.image.source="https://github.com/dusansimic/package-images" \
+  org.opencontainers.image.url="https://github.com/dusanismic/package-images" \
+  org.opencontainers.image.documentation="https://github.com/dusanismic/package-images/blob/main/images/dust/README.md" \
+  org.opencontainers.image.version="${PACKAGE_VERSION}" \
+  org.opencontainers.image.ref.name="ghcr.io/dusanismic/package-images/dust:latest" \
+  org.opencontainers.image.base.name="docker.io/library/alpine:latest" \
+  com.github.dusansimic.package-images.name="dust" \
+  com.github.dusansimic.package-images.version="${PACKAGE_VERSION}"
+
+ARG LIBC_DIST=musl
+ARG ARCH=x86_64
+
+ADD https://github.com/bootandy/dust/releases/download/v${PACKAGE_VERSION}/dust-v${PACKAGE_VERSION}-${ARCH}-unknown-linux-${LIBC_DIST}.tar.gz /tmp/dust.tar.gz
+RUN mkdir /tmp/dust
+RUN tar -xzf /tmp/dust.tar.gz -C /tmp/dust --strip-components=1
+RUN install -m755 /tmp/dust/dust /usr/local/bin/dust
+RUN rm -r /tmp/dust
+RUN rm /tmp/dust.tar.gz
+
+ENTRYPOINT ["/usr/local/bin/dust"]
