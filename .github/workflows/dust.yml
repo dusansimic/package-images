@@ -44,7 +44,7 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64, i686, aarch64]
-        libc: [musl, glibc]
+        libc: [musl, gnu]
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v3
@@ -62,7 +62,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest,enable=${{ matrix.arch == 'x86_64' && matrix.libc == 'glibc' }}
+            type=raw,value=latest,enable=${{ matrix.arch == 'x86_64' && matrix.libc == 'gnu' }}
             type=raw,value=${{ matrix.arch }}-${{ matrix.libc }}
             type=raw,value=${{ needs.get-version.outputs.gh_version }}-${{ matrix.arch }}-${{ matrix.libc }}
       - name: Build and push image

@@ -28,7 +28,7 @@ jobs:
         run: |
           current_version="$(grep -E "PACKAGE_VERSION=.+" images/${{ env.IMAGE_NAME }}/Containerfile | sed 's/.*=//')"
           echo $current_version
-          latest_version="$(curl -sL https://api.github.com/repos/1player/host-spawn/releases/latest | jq -r '.tag_name' | cut -c2-)"
+          latest_version="$(curl -sL https://api.github.com/repos/1player/host-spawn/releases/latest | jq -r '.tag_name')"
           echo $latest_version
           if [ "$current_version" != "$latest_version" ]; then
             next_version="$latest_version"
