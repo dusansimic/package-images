@@ -1,7 +1,7 @@
 ARG BASE_IMAGE=docker.io/library/alpine:latest
 FROM $BASE_IMAGE
 
-ARG PACKAGE_VERSION=1.4.2
+ARG PACKAGE_VERSION=1.4.1
 
 LABEL org.opencontainers.image.authors="Dušan Simić <dusan.simic1810@gmail.com>" \
   org.opencontainers.image.vendor="Dušan Simić" \
