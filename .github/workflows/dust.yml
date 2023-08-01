@@ -45,6 +45,17 @@ jobs:
       matrix:
         arch: [x86_64, i686, aarch64]
         libc: [musl, gnu]
+        include:
+          - base_image: docker.io/library/debian:bookworm-slim
+            libc: gnu
+          - base_image: docker.io/library/alpine:latest
+            libc: musl
+          - platform: linux/amd64
+            arch: x86_64
+          - platform: linux/386
+            arch: i686
+          - platform: linux/arm64
+            arch: aarch64
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v3
@@ -72,7 +83,9 @@ jobs:
           file: ./images/${{ env.IMAGE_NAME }}/Containerfile
           push: true
           no-cache: true
+          platforms: ${{ matrix.platform }}
           build-args: |
+            BASE_IMAGE=${{ matrix.base_image }}
             ARCH=${{ matrix.arch }}
             LIBC_DIST=${{ matrix.libc }}
           tags: |
