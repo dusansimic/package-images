@@ -19,7 +19,7 @@ LABEL org.opencontainers.image.authors="Dušan Simić <dusan.simic1810@gmail.com
 
 ARG ARCH=x86_64
 
-ADD https://github.com/1player/host-spawn/releases/download/v${PACKAGE_VERSION}/host-spawn-${ARCH} /usr/local/bin/host-spawn
+ADD https://github.com/1player/host-spawn/releases/download/${PACKAGE_VERSION}/host-spawn-${ARCH} /usr/local/bin/host-spawn
 RUN chmod +x /usr/local/bin/host-spawn
 
 ENTRYPOINT ["/usr/local/bin/host-spawn"]
