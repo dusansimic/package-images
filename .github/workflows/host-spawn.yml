@@ -44,6 +44,17 @@ jobs:
     strategy:
       matrix:
         arch: [x86_64, i686, i386, armv7, aarch64]
+        include:
+          - platform: linux/amd64
+            arch: x86_64
+          - platform: linux/386
+            arch: i386
+          - platform: linux/386
+            arch: i686
+          - platform: linux/arm/v7
+            arch: armv7
+          - platform: linux/arm64
+            arch: aarch64
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v3
@@ -71,6 +82,7 @@ jobs:
           file: ./images/${{ env.IMAGE_NAME }}/Containerfile
           push: true
           no-cache: true
+          platforms: ${{ matrix.platform }}
           build-args: |
             ARCH=${{ matrix.arch }}
           tags: |
